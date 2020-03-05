@@ -1,0 +1,16 @@
+*.pro.user
+*.pro.user*
+*.cpp.*
+*.h.*
+build/*
+/build-*/
+/.project
+PlotTool/resources/*.txt
+results/*.txt
+results/*.csv
+results/Mobility*
+results/Dl*
+results/Ul*
+results/Pl*
+results/Energy*
+results/Performance*

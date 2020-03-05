@@ -1,0 +1,6 @@
+include(mobility/Mobility.pri)
+include(settings/Settings.pri)
+include(simulation/Simulation.pri)
+include(world/World.pri)
+include(energy/Energy.pri)
+include(utils/Utils.pri)

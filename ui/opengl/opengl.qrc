@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>frag.frag</file>
+        <file>main_gl.qml</file>
+        <file>vert.vsh</file>
+    </qresource>
+</RCC>

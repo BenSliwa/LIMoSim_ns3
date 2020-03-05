@@ -1,0 +1,43 @@
+#include "behavior_followfromabove.h"
+
+#include "LIMoSim/mobility/uav/uav.h"
+
+namespace LIMoSim {
+
+Behavior_FollowFromAbove::Behavior_FollowFromAbove(std::string _targetAgentId,
+                                                   double _elevation,
+                                                   double _followRadius,
+                                                   std::string _agentId
+                                                   ):
+    Behavior("FollowFromAbove", _agentId),
+    m_targetAgentId(_targetAgentId),
+    m_elevation_m(_elevation),
+    m_followRadius_m(_followRadius)
+{
+
+}
+
+} // namespace LIMoSim
+
+
+// Behavior interface
+LIMoSim::Steering LIMoSim::Behavior_FollowFromAbove::apply()
+{
+    double maxSpeed = getAgent()->getModel()->getLocomotion()->getVelocityMax();    
+    auto mobilityData = getAgent()->getLocalVehicleManager().getMobilityData();
+    
+    if (mobilityData.count(m_targetAgentId)) {
+        // If mobility data of target agent is known, proceed to following
+        
+        Vector3d desiredVelocity = (mobilityData.at(m_targetAgentId).position - getAgent()->getPosition());
+        if (desiredVelocity.norm() < 1e-4) {
+            return Steering();
+        }
+        desiredVelocity = controlledDescent(0, m_followRadius_m,0, maxSpeed,desiredVelocity);
+        Vector3d positionSteering = desiredVelocity - getAgent()->getVelocity();
+    
+        return Steering(Orientation3d(0), positionSteering);
+    } else {
+        // If not then stop
+    }
+}
