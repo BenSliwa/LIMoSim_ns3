@@ -24,8 +24,25 @@ A preprint of the **corresponding scientific publication** (IEEE VTC-Fall 2019) 
 ```
 
 ## Quickstart
-After following the [setup instructions](INSTALL.md), ...
+After following the [setup instructions](INSTALL.md), you can build and start a demo scenario as follows:
+- Configure a suitable kit
+- To enable ns3 coupling, the build switch `exts` must be set with the value `ns3`. This can be achieved as follows:
+  - Open the `Projects` view on the right pane
+  - Select `Build` under `Build & Run`
+  - Add `exts=ns3` in the additional arguments input field located in the `Build Steps` section.
+- Compile
+- To start a standalone demo scenario:
+  - Open the `Projects` view on the right pane
+  - Select `Run` under `Build & Run`
+  - Add `-n standalone -s $scenarioName` in the command line arguments input under `Run`
+- To start a ns3 demo scenario:
+  - Open the `Projects` view on the right pane
+  - Select `Run` under `Build & Run`
+  - Add `-n ns3 -s $scenarioName` in the command line arguments input under `Run`
 
+  NB: Available Scenario names can be found here:
+  - standalone: loadScenarioRegistry()@standalone/scenarios.css
+  - ns3: loadScenarioRegistry()@ns3/examples/ns3examplescenarios.cc 
 
 ## Related Publications
 - M. Patchou, B. Sliwa, C. Wietfeld, [**Unmanned Aerial Vehicles in Logistics: Efficiency Gains and Communication Performance of Hybrid Combinations of Ground and Aerial Vehicles**](https://arxiv.org/abs/1910.10451), In *IEEE Vehicular Networking Conference (VNC) 2019*, 2019
