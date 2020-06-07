@@ -71,12 +71,6 @@ void mixedScenario_1();
 
 void noOpScenario();
 
-void parcelDeliveryScenario_1();
-
-void parcelDeliveryScenario_2();
-
-void parcelDeliveryScenario_withoutPrediction();
-
 void randomWalkScenario_1();
 
 void randomWalk_GaussMarkov_Scenario_1();

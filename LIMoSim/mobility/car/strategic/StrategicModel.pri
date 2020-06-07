@@ -4,8 +4,7 @@ HEADERS += \
     $$PWD/followpath.h \
     $$PWD/randomwaypoint.h \
     $$PWD/samerandompath.h \
-    $$PWD/deterministicpath.h \
-    $$PWD/truckdelivery.h
+    $$PWD/deterministicpath.h
 
 SOURCES += \
     $$PWD/strategicmodel.cc \
@@ -13,5 +12,4 @@ SOURCES += \
     $$PWD/followpath.cc \
     $$PWD/randomwaypoint.cc \
     $$PWD/samerandompath.cc \
-    $$PWD/deterministicpath.cc \
-    $$PWD/truckdelivery.cc
+    $$PWD/deterministicpath.cc

@@ -1,12 +1,10 @@
 #include "vehiclemanager.h"
 
-#include "energy/energymonitor.h"
-
 namespace LIMoSim
 {
 
 VehicleManager::VehicleManager():
-    m_broadcastMobilityInterval_s(0.5),
+    m_broadcastMobilityInterval_s(0.1),
     m_lastBroadcast_s(0),
     m_deterministicCarPath(false)
 {
@@ -48,25 +46,6 @@ Car* VehicleManager::createCar(const std::string &_id)
     return car;
 }
 
-DeliveryTruck *VehicleManager::createDeliveryTruck(
-        const std::string &_id,
-        const uint _delivererCount,
-        std::vector<std::string> &_deliveryList
-        )
-{
-    DeliveryTruck *truck = new DeliveryTruck(
-                _id,
-                _delivererCount,
-                _deliveryList
-                );
-    m_vehicles[_id] = truck;
-
-    registerLocalVehicleManager(truck->getId(), new LocalVehicleManager(truck));
-    setUIDataForVehicle(truck);
-
-    return truck;
-}
-
 UAV* VehicleManager::createUAV(const std::string &_id)
 {
     UAV *uav = new UAV(_id);
@@ -74,7 +53,6 @@ UAV* VehicleManager::createUAV(const std::string &_id)
 
     registerLocalVehicleManager(uav->getId(), new LocalVehicleManager(uav));
     setUIDataForVehicle(uav);
-    Energy::EnergyMonitor::getInstance()->startMonitoring(_id);
 
     return uav;
 }
@@ -93,7 +71,6 @@ void VehicleManager::deleteVehicle(const std::string &_id)
     if(m_vehicles.count(_id)>0)
     {
         Vehicle *vehicle = m_vehicles[_id];
-        Energy::EnergyMonitor::getInstance()->stopMonitoring(_id);
         unregisterLocalVehicleManager(_id);
         deleteUIDataForVehicle(_id);
         delete vehicle;

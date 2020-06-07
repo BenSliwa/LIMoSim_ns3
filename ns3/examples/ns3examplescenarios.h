@@ -27,12 +27,7 @@ void mmwaveSimpleEpcStatic_mult(unsigned int runs = 1);
 void mmwaveCarFollowing();
 void mmwaveBeamSteering();
 #endif
-void parcelDelivery();
-void parcelDeliveryWithLte();
-void parcelDeliveryWithWave();
-#ifdef NS_V2X_BUILD
-void parcelDeliveryWithCV2X();
-#endif
+
 #ifdef NS_V2X_BUILD
 void v2xSimple();
 void v2xSimple_mult(unsigned int runs = 5);

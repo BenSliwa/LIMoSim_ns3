@@ -19,7 +19,6 @@ protected:
 
 private:
     Target m_target;
-    Vector3d predictPosition(double _future);
 };
 
 } // namespace LIMoSim

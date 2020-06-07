@@ -29,8 +29,6 @@ private:
 
     Vector3d predictTargetPosition();
 
-    Vector3d predictPosition(double _future);
-
     // Behavior interface
 public:
     Steering apply();

@@ -19,7 +19,9 @@ NS_OBJECT_ENSURE_REGISTERED (DeterministicObstacleShadowingPropagationLossModel)
 
 
 DeterministicObstacleShadowingPropagationLossModel::
-DeterministicObstacleShadowingPropagationLossModel():
+DeterministicObstacleShadowingPropagationLossModel():    
+    m_beta(9),
+    m_gamma(0.4),
     rayTracing(new Raytracing())
 {
 
@@ -48,18 +50,16 @@ double DeterministicObstacleShadowingPropagationLossModel::GetLoss(Ptr<MobilityM
     const Vector _b = b->GetPosition();
 
     std::string cacheKeyVal = toObstacleShadowingCacheKey(_a, _b);
-    double L_mW;
-    if (osc->counts(cacheKeyVal, &L_mW)){
-        return L_mW;
+    double L_dB;
+    if (osc->counts(cacheKeyVal, &L_dB)){
+        return L_dB;
     } else {
         Vector3d pos_a = toLIMoSimVector(_a);
         Vector3d pos_b = toLIMoSimVector(_b);RayTrace trace = rayTracing->trace(pos_a, pos_b);
         double L_obs_dB = trace.attenuated_m * m_gamma + trace.intersections.size() * m_beta;
-        double L_obs_mW = pow(10, L_obs_dB/10);
-        double L_mW = CalculateLoss (d);
-        L_mW += L_obs_mW;
-        osc->cache(cacheKeyVal, L_mW);
-        return L_mW;
+        double L_dB = CalculateLoss (d) + L_obs_dB;
+        osc->cache(cacheKeyVal, L_dB);
+        return L_dB;
     }
 }
 

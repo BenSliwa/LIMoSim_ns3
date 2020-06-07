@@ -1,8 +1,6 @@
 #include "openglcanvas.h"
 #include "openglshape.h"
 
-#include "demo/deliverylistservice.h"
-
 namespace OpenGL
 {
 
@@ -101,19 +99,16 @@ void OpenGLCanvas::drawCube(const Vector3d &_position, float _width, const QColo
 
 void OpenGLCanvas::drawBuilding(Building *_building)
 {
-    std::string color = delivery::DeliveryListService::getInstance()->
-            getDeliveryStatusColor(_building->getId());
     std::vector<Node*> nodes = _building->getNodes();
     if(nodes.size()>1)
     {
-//        OpenGLShape shape("darkgray");
-        OpenGLShape shape(color.c_str());
+        OpenGLShape shape("darkgray");
         for(unsigned int i=0; i<nodes.size()-1; i++)
         {
             Vector3d position = nodes.at(i)->getPosition();
             shape.addVertex(fromVector(position));
         }
-        p_renderer->drawPolygon(shape, _building->getHeight(), color == "darkgray");
+        p_renderer->drawPolygon(shape, _building->getHeight());
     }
 }
 

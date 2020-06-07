@@ -14,7 +14,7 @@ INCLUDEPATH += $$PWD/../ # project view from core
 include(../LIMoSim/LIMoSim.pri)
 include(UI.pri)
 include (../standalone/Standalone.pri)
-include(../demo/Demo.pri)
+#include(../demo/Demo.pri)
 
 contains(exts, ns3) {
     include (../ns3/NS3.pri)

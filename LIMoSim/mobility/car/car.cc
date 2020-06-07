@@ -4,7 +4,6 @@
 #include "LIMoSim/mobility/car/strategic/randomwaypoint.h"
 #include "LIMoSim/mobility/car/strategic/samerandompath.h"
 #include "LIMoSim/mobility/car/strategic/deterministicpath.h"
-#include "LIMoSim/mobility/car/strategic/truckdelivery.h"
 #include "LIMoSim/world/road/intersection.h"
 #include "LIMoSim/world/vehiclemanager.h"
 #include "LIMoSim/world/world.h"

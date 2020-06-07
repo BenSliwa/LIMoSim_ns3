@@ -24,7 +24,7 @@
 #include "LIMoSim/world/vehiclemanager.h"
 #include "LIMoSim/world/road/road.h"
 #include "LIMoSim/world/road/lanesegment.h"
-#include "LIMoSim/world/road/lane.h"
+//#include "LIMoSim/world/road/lane.h"
 #include "LIMoSim/world/road/roadsegment.h"
 #include "LIMoSim/simulation/performancemonitor.h"
 #include "LIMoSim/settings/filehandler.h"
@@ -62,7 +62,7 @@ std::vector<Vector3d> readBasestationsFile() {
     // erase header line
     lines.erase(lines.begin());
 
-    Vector3d origin = World::getInstance()->getOrigin();
+    Vector3d origin = World::getInstance()->getReference();
 
     std::vector<Vector3d> positions;
 

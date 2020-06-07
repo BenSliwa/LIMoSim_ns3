@@ -15,7 +15,7 @@ Vehicle::Vehicle(const std::string &_id, const std::string &_type) :
     m_updateTimer(nullptr),
     m_updateInterval_s(0.01),
     m_mobilityModel(nullptr),
-    moveSpeedUp(10)
+    moveSpeedUp(1)
 {
 
     m_mobilityDataExporter = new MobilityDataExporter(this, 0.1);

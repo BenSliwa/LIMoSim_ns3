@@ -16,7 +16,6 @@
 #include "ui/data/uidatadrawer.h"
 #include "ui/uimanagerservice.h"
 
-#include "demo/deliverylistservice.h"
 #include <math.h>
 
 namespace LIMoSim
@@ -108,11 +107,7 @@ void UiManager::drawBuildings(Canvas *_canvas)
     for(it=buildings.begin(); it!=buildings.end(); it++)
     {
         Building *building = it->second;
-        if (delivery::DeliveryListService::getInstance()->
-                getDeliveryStatusColor(building->getId()) == "darkgray") {
-            _canvas->drawBuilding(building);
-        }
-//        _canvas->drawBuilding(building);
+        _canvas->drawBuilding(building);
     }
 }
 
@@ -473,13 +468,6 @@ void UiManager::onPaint()
     //
     for(int i=0; i<m_visualizer.size(); i++)
         m_visualizer.at(i)->update(this);
-
-    delivery::DeliveryListService * dls = delivery::DeliveryListService::getInstance();
-    std::vector<std::string> deliveryList = dls->getDeliveryList();
-    std::map<std::string, Building*> buildings = World::getInstance()->getBuildings();
-    for (std::string buildingId:deliveryList) {
-        m_canvas.drawBuilding(buildings.at(buildingId));
-    }
 
     //
     drawVehicles(&m_canvas);

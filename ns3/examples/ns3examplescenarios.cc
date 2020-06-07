@@ -20,12 +20,6 @@
 #include "mmwave-beam-steering/mmwavebeamsteering.h"
 #endif
 
-// parcel delivery examples
-#include "parcel-delivery/parceldelivery.h"
-#include "parcel-delivery/parceldelivery_lte.h"
-#include "parcel-delivery/parceldelivery_wave.h"
-#include "parcel-delivery/parceldelivery_cv2x.h"
-
 #ifdef NS_V2X_BUILD
 // v2x examples
 #include "v2x-simple/v2xsimple.h"
@@ -327,32 +321,6 @@ void mmwaveBeamSteering()
 #endif
 
 
-void parcelDelivery()
-{
-    LogComponentEnable("ParcelDelivery", LOG_LEVEL_INFO);
-    ParcelDelivery::setup(0, 1);
-}
-
-void parcelDeliveryWithLte()
-{
-    LogComponentEnable("ParcelDelivery_LTE", LOG_LEVEL_INFO);
-    ParcelDelivery::LTE::setup(0, 1);
-}
-
-void parcelDeliveryWithWave()
-{
-    LogComponentEnable("ParcelDelivery_Wave", LOG_LEVEL_INFO);
-    ParcelDelivery::Wave::setup();
-}
-
-#ifdef NS_V2X_BUILD
-void parcelDeliveryWithCV2X()
-{
-    LogComponentEnable("ParcelDelivery_CV2X", LOG_LEVEL_INFO);
-    ParcelDelivery::CV2X::setup();
-}
-#endif
-
 #ifdef NS_V2X_BUILD
 void v2xSimple()
 {
@@ -401,13 +369,9 @@ void loadScenarioRegistry()
 {
     ScenarioRegistry *registry = ScenarioRegistry::getInstance();
 
-    registry->registerScenario("parcelDelivery", [](){Examples::ParcelDelivery::setup();});
     #ifdef NS_V2X_BUILD
-    registry->registerScenario("parcelDeliveryWithCV2X", [](){Examples::ParcelDelivery::CV2X::setup();});
     registry->registerScenario("v2xFollower", [](){Examples::V2XSimple();});
     #endif
-    registry->registerScenario("parcelDeliveryWithLTE", [](){Examples::ParcelDelivery::LTE::setup();});
-    registry->registerScenario("parcelDeliveryWithWave", [](){Examples::ParcelDelivery::Wave::setup();});
     registry->registerScenario("lteAerialBsCluster", [](){Examples::LteAerialBasestationCluster::setup();});
     registry->registerScenario("lteCoverageMobile", [](){Examples::LteCoverageMobile::setup();});
     registry->registerScenario("lteCoverageStatic", [](){Examples::LteCoverageStatic::setup();});

@@ -2,7 +2,6 @@
 #define LIMOSIM_VEHICLEMANAGER_H
 
 #include "LIMoSim/mobility/car/car.h"
-#include "LIMoSim/mobility/deliverytruck/deliverytruck.h"
 #include "LIMoSim/mobility/uav/uav.h"
 #include "LIMoSim/mobility/mobilitydata.h"
 #include "LIMoSim/world/localvehiclemanager.h"
@@ -14,7 +13,7 @@ namespace LIMoSim
 {
 typedef std::map<std::string, Vehicle*> VehicleMap;
 typedef std::map<std::string, LocalVehicleManager*> LocalVehicleManagerMap;
-using namespace mobility::car;
+
 class VehicleManager : public EventHandler
 {
 public:
@@ -25,11 +24,6 @@ public:
 
     // creation
     Car* createCar(const std::string &_id);
-    DeliveryTruck* createDeliveryTruck(
-            const std::string &_id,
-            const uint _delivererCount,
-            std::vector<std::string> &_deliveryList
-            );
     UAV* createUAV(const std::string &_id);
 
     // deletion

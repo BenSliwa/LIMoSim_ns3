@@ -4,14 +4,10 @@
 
 #include "LIMoSim/mobility/uav/reynolds/locomotion.h"
 
-#include "LIMoSim/energy/models/quadrotor/quadrotor.h"
-
 namespace LIMoSim {
 
 class UAV;
 typedef std::pair<Vector3d,Vector3d> VectorPair;
-
-using namespace Energy::Models;
 
 class UAV_Locomotion : public Locomotion
 {
@@ -51,8 +47,6 @@ protected:
     Vector3d fromAgentSpace(Vector3d _vec);
     Vector3d getDirection();
 
-private:
-    Quadrotor m_quadrotorEnergyModel;
 };
 
 } // namespace LIMoSim

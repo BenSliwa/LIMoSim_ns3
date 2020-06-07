@@ -4,9 +4,6 @@
 #include <cmath>
 #include "LIMoSim/world/matrix3d.h"
 
-#include "LIMoSim/energy/energymonitor.h"
-#include "demo/behavior_dock.h"
-
 namespace LIMoSim {
 
 UAV_Locomotion::UAV_Locomotion(std::string _agentId):
@@ -126,32 +123,10 @@ LocomotionUpdate UAV_Locomotion::apply(Steering steering, double _timeDelta_s)
         Vehicle* carryingAgent = getAgent()->getModel()->getCarryingAgent();
         Vector3d nextPos = carryingAgent->getPosition();
 
-        Energy::EnergyMonitor::getInstance()->saveIncrementalUpdate(getAgent()->getId(), _timeDelta_s, 0);
+//        Energy::EnergyMonitor::getInstance()->saveIncrementalUpdate(getAgent()->getId(), _timeDelta_s, 0);
         // TODO: orientation must be superposed.
         return LocomotionUpdate(carryingAgent->getOrientation(), Orientation3d(),nextPos,Vector3d(), Vector3d());
     }
-
-    // TODO: this may not be needed anymore if the model already knows the uav is docked.
-    if (behaviorName == "Dock" ) {
-        delivery::Behaviors::Behavior_Dock* docking;
-        docking = dynamic_cast<delivery::Behaviors::Behavior_Dock*>(getAgent()->getModel()->getBehavior());
-        Vehicle* dockTarget = docking->getDockTarget();
-        Vector3d nextPos = dockTarget->getPosition();
-
-        Energy::EnergyMonitor::getInstance()->saveIncrementalUpdate(getAgent()->getId(), _timeDelta_s, 0);
-        return LocomotionUpdate(dockTarget->getOrientation(), Orientation3d(),nextPos,Vector3d(), Vector3d());
-
-    }
-//    if (behaviorName == "NS3_Delivery") {
-//        auto delivery = dynamic_cast<NS3::Behaviors::NS3_Behavior_Delivery*>(getAgent()->getModel()->getBehavior());
-//        if (delivery->getState() == NS3::Behaviors::DOCKED) {
-//            delivery::Behaviors::Behavior_Dock* docking = (dynamic_cast<NS3::Behaviors::NS3_Behavior_Delivery*>(getAgent()->getModel()->getBehavior()))->getDockBehavior();
-//            Vehicle* dockTarget = docking->getDockTarget();
-//            Vector3d nextPos = dockTarget->getPosition();
-//            Energy::EnergyMonitor::getInstance()->saveIncrementalUpdate(getAgent()->getId(), _timeDelta_s, 0);
-//            return LocomotionUpdate(dockTarget->getOrientation(), Orientation3d(),nextPos,Vector3d(), Vector3d());
-//        }
-//    }
 
     // compute next position as consequence of corrective acceleration
     std::vector<Vector3d> nextPosAndVelocity = applyPositionSteering(steering.position, _timeDelta_s);
@@ -162,8 +137,8 @@ LocomotionUpdate UAV_Locomotion::apply(Steering steering, double _timeDelta_s)
     //std::cout << "next position: " << nextPosAndVelocity.at(0).toString().c_str() << std::endl;
 
     // register energy consumption for step
-    double energy = m_quadrotorEnergyModel.step(_timeDelta_s, steering.position, steering.orientation);
-    Energy::EnergyMonitor::getInstance()->saveIncrementalUpdate(getAgent()->getId(), _timeDelta_s, energy);
+//    double energy = m_quadrotorEnergyModel.step(_timeDelta_s, steering.position, steering.orientation);
+//    Energy::EnergyMonitor::getInstance()->saveIncrementalUpdate(getAgent()->getId(), _timeDelta_s, energy);
 
     return LocomotionUpdate(nextOrientation.first, nextOrientation.second, nextPosAndVelocity.at(0), nextPosAndVelocity.at(1), nextPosAndVelocity.at(2));
 }
