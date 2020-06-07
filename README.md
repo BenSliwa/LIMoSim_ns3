@@ -44,6 +44,19 @@ After following the [setup instructions](INSTALL.md), you can build and start a 
   - standalone: loadScenarioRegistry()@standalone/scenarios.css
   - ns3: loadScenarioRegistry()@ns3/examples/ns3examplescenarios.cc 
 
+Valid Standalone scenario names are the following:
+- circleAround
+- noop
+- followCar
+
+Valid ns3 scenario names are:
+- lteAerialBsCluster
+- lteCoverageMobile
+- lteCoverageStatic
+- lteFollower
+- lteStaticFollower
+- waveFollower
+
 ## Related Publications
 - M. Patchou, B. Sliwa, C. Wietfeld, [**Unmanned Aerial Vehicles in Logistics: Efficiency Gains and Communication Performance of Hybrid Combinations of Ground and Aerial Vehicles**](https://arxiv.org/abs/1910.10451), In *IEEE Vehicular Networking Conference (VNC) 2019*, 2019
 - B. Sliwa, M. Patchou, C. Wietfeld, [**Lightweight simulation of hybrid aerial- and ground-based vehicular communication networks**](https://arxiv.org/abs/1906.08993), In *IEEE 90th Vehicular Technology Conference (VTC-Fall)*, 2019
